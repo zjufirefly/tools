@@ -55,7 +55,7 @@ class send_copy_thread(threading.Thread):
 				
 def send_copy():
     v = pyperclip.paste();
-        if v != None and v != "":
+    if v != None and v != "":
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("10.9.3.245", 10086))
