@@ -1,3 +1,4 @@
+#!/usr/bin/python
 """
 A simple example of hooking the keyboard on Linux using pyxhook
 
@@ -30,7 +31,7 @@ class copy_server(threading.Thread):
 
         while 1:
             try:
-                message, addr = s.recvfrom(8192)
+                message, addr = s.recvfrom(81920)
                 pyperclip.copy(str(message))
             except:
                 traceback.print_exc()
@@ -53,14 +54,14 @@ def kbevent( event ):
     global ctrl_press
     if event.ScanCode == 37:
         ctrl_press = 1
+    if event.ScanCode == 54:
+        if ctrl_press == 1:
+            send_copy()
 
 def key_up_event( event ):
     global ctrl_press
     if event.ScanCode == 37:
         ctrl_press = 0
-    if event.ScanCode == 54:
-        if ctrl_press == 1:
-            send_copy()
 
 if __name__ == '__main__':
     ctrl_press = 0

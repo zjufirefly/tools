@@ -32,7 +32,7 @@ class copy_server(threading.Thread):
 
         while 1:
             try:
-                message, addr = s.recvfrom(8192)
+                message, addr = s.recvfrom(81920)
                 pyperclip.copy(message)
             except:
                 traceback.print_exc()
@@ -41,7 +41,7 @@ class copy_server(threading.Thread):
 class send_copy_thread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-    
+
     def run(self):
         v = pyperclip.paste();
         if v != None and v != "":
@@ -51,8 +51,8 @@ class send_copy_thread(threading.Thread):
                 s.sendall(v.encode("utf-8"))
                 s.close();
             except:
-                traceback.print_exc()    
-				
+                traceback.print_exc()
+
 def send_copy():
     v = pyperclip.paste();
     if v != None and v != "":
@@ -62,7 +62,7 @@ def send_copy():
             s.sendall(v.encode("utf-8"))
             s.close();
         except:
-            traceback.print_exc()  
+            traceback.print_exc()
     return
 
 def key_all_event(event):
@@ -77,13 +77,13 @@ def key_all_event(event):
             if ctrl_press == 1:
                 send_copy();
     return True
-        
-        
+
+
 if __name__ == '__main__':
     ctrl_press = 0
     serv = copy_server()
     serv.start()
-    
+
     print "key listening"
     #Create hookmanager
     hookman = pyHook.HookManager()
